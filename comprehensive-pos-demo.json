@@ -1,0 +1,502 @@
+{
+  "type": "splitter",
+  "UID": "main-pos-interface",
+  "title": "Complete POS System Demo - All Controls",
+  "props": {
+    "splitRatio": 0.7,
+    "orientation": "horizontal"
+  },
+  "style": {
+    "height": "100vh",
+    "background": "var(--background)"
+  },
+  "children": [
+    {
+      "type": "tab-control",
+      "UID": "pos-tabs",
+      "style": {
+        "height": "100%"
+      },
+      "children": [
+        {
+          "title": "Sales Terminal",
+          "type": "panel",
+          "UID": "sales-panel",
+          "children": [
+            {
+              "type": "grid-layout",
+              "UID": "sales-grid",
+              "style": {
+                "rows": 2,
+                "columns": 2,
+                "gap": "15px",
+                "height": "100%"
+              },
+              "children": [
+                {
+                  "type": "section",
+                  "UID": "product-section",
+                  "title": "Product Entry",
+                  "children": [
+                    {
+                      "type": "barcode-input",
+                      "UID": "barcode-scanner",
+                      "placeholder": "Scan or enter barcode..."
+                    },
+                    {
+                      "type": "search-bar",
+                      "UID": "product-search",
+                      "placeholder": "Search products by name..."
+                    },
+                    {
+                      "type": "scale-input",
+                      "UID": "produce-scale",
+                      "props": {
+                        "pricePerUnit": 2.99
+                      }
+                    },
+                    {
+                      "type": "price-checker",
+                      "UID": "price-lookup"
+                    }
+                  ]
+                },
+                {
+                  "type": "button-pad",
+                  "UID": "number-pad",
+                  "props": {
+                    "rows": 4,
+                    "columns": 3
+                  },
+                  "children": [
+                    {"type": "button", "UID": "btn-1", "text": "1", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-2", "text": "2", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-3", "text": "3", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-4", "text": "4", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-5", "text": "5", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-6", "text": "6", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-7", "text": "7", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-8", "text": "8", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-9", "text": "9", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-clear", "text": "Clear", "props": {"variant": "destructive"}},
+                    {"type": "button", "UID": "btn-0", "text": "0", "props": {"variant": "outline"}},
+                    {"type": "button", "UID": "btn-enter", "text": "Enter", "props": {"variant": "default"}}
+                  ]
+                },
+                {
+                  "type": "cart-grid",
+                  "UID": "shopping-cart",
+                  "props": {
+                    "items": [
+                      {"id": "001", "name": "Coffee Mug", "price": 12.99, "quantity": 2},
+                      {"id": "002", "name": "Notebook", "price": 5.49, "quantity": 1},
+                      {"id": "003", "name": "Pen Set", "price": 8.99, "quantity": 3}
+                    ]
+                  }
+                },
+                {
+                  "type": "section",
+                  "UID": "quick-actions",
+                  "title": "Quick Actions",
+                  "children": [
+                    {
+                      "type": "menu-button",
+                      "UID": "transaction-menu",
+                      "text": "Transaction",
+                      "props": {"variant": "secondary"},
+                      "children": [
+                        {"UID": "void-transaction", "text": "Void Transaction"},
+                        {"UID": "hold-transaction", "text": "Hold Transaction"},
+                        {"UID": "recall-transaction", "text": "Recall Transaction"},
+                        {"UID": "refund-item", "text": "Refund Item"}
+                      ]
+                    },
+                    {
+                      "type": "button",
+                      "UID": "clear-cart",
+                      "text": "Clear Cart",
+                      "props": {"variant": "destructive"}
+                    },
+                    {
+                      "type": "cash-drawer",
+                      "UID": "cash-drawer-btn"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Payment & Checkout",
+          "type": "panel",
+          "UID": "payment-panel",
+          "children": [
+            {
+              "type": "grid-layout",
+              "UID": "payment-grid",
+              "style": {
+                "rows": 2,
+                "columns": 2,
+                "gap": "20px",
+                "height": "100%"
+              },
+              "children": [
+                {
+                  "type": "totals-display",
+                  "UID": "transaction-totals"
+                },
+                {
+                  "type": "payment-control",
+                  "UID": "payment-methods"
+                },
+                {
+                  "type": "change-due-display",
+                  "UID": "change-calculator"
+                },
+                {
+                  "type": "section",
+                  "UID": "payment-actions",
+                  "title": "Payment Actions",
+                  "children": [
+                    {
+                      "type": "button",
+                      "UID": "process-payment",
+                      "text": "Process Payment",
+                      "props": {"variant": "default", "size": "lg"}
+                    },
+                    {
+                      "type": "button",
+                      "UID": "split-payment",
+                      "text": "Split Payment",
+                      "props": {"variant": "secondary"}
+                    },
+                    {
+                      "type": "toggle",
+                      "UID": "tax-exempt",
+                      "text": "Tax Exempt Customer",
+                      "props": {"checked": false}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Customer Info",
+          "type": "panel",
+          "UID": "customer-panel",
+          "children": [
+            {
+              "type": "customer-info-panel",
+              "UID": "customer-details",
+              "props": {
+                "customer": {
+                  "name": "Jane Smith",
+                  "id": "CUST001",
+                  "phone": "(555) 123-4567",
+                  "email": "jane@example.com"
+                }
+              }
+            },
+            {
+              "type": "section",
+              "UID": "customer-actions",
+              "title": "Customer Actions",
+              "style": {
+                "marginTop": "20px"
+              },
+              "children": [
+                {
+                  "type": "textbox",
+                  "UID": "customer-search",
+                  "placeholder": "Search customers by name or phone..."
+                },
+                {
+                  "type": "button",
+                  "UID": "new-customer",
+                  "text": "New Customer",
+                  "props": {"variant": "default"}
+                },
+                {
+                  "type": "button",
+                  "UID": "customer-lookup",
+                  "text": "Lookup Customer",
+                  "props": {"variant": "secondary"}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Reports & Data",
+          "type": "panel",
+          "UID": "reports-panel",
+          "children": [
+            {
+              "type": "datagrid",
+              "UID": "sales-data",
+              "props": {
+                "columns": [
+                  {"key": "id", "title": "Transaction ID"},
+                  {"key": "customer", "title": "Customer"},
+                  {"key": "total", "title": "Total Amount"},
+                  {"key": "method", "title": "Payment Method"},
+                  {"key": "date", "title": "Date"}
+                ],
+                "data": [
+                  {"id": "TXN001", "customer": "John Doe", "total": 45.99, "method": "Card", "date": "2024-01-15"},
+                  {"id": "TXN002", "customer": "Jane Smith", "total": 23.50, "method": "Cash", "date": "2024-01-15"},
+                  {"id": "TXN003", "customer": "Bob Johnson", "total": 78.25, "method": "Digital", "date": "2024-01-15"}
+                ]
+              }
+            },
+            {
+              "type": "section",
+              "UID": "report-filters",
+              "title": "Filter Options",
+              "style": {
+                "marginTop": "20px"
+              },
+              "children": [
+                {
+                  "type": "datepicker",
+                  "UID": "start-date",
+                  "value": "2024-01-01"
+                },
+                {
+                  "type": "datepicker",
+                  "UID": "end-date",
+                  "value": "2024-01-31"
+                },
+                {
+                  "type": "dropdown",
+                  "UID": "payment-filter",
+                  "placeholder": "Filter by payment method...",
+                  "props": {
+                    "options": ["All Methods", "Cash", "Card", "Digital", "Check"]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Input Controls Demo",
+          "type": "panel",
+          "UID": "input-demo-panel",
+          "children": [
+            {
+              "type": "grid-layout",
+              "UID": "input-demo-grid",
+              "style": {
+                "rows": 3,
+                "columns": 2,
+                "gap": "15px"
+              },
+              "children": [
+                {
+                  "type": "textbox",
+                  "UID": "demo-textbox",
+                  "placeholder": "Enter text here...",
+                  "value": "Sample text"
+                },
+                {
+                  "type": "numeric-input",
+                  "UID": "demo-numeric",
+                  "placeholder": "Enter number...",
+                  "props": {"min": 0, "max": 1000, "step": 0.01},
+                  "value": "25.99"
+                },
+                {
+                  "type": "password",
+                  "UID": "demo-password",
+                  "placeholder": "Enter password..."
+                },
+                {
+                  "type": "dropdown",
+                  "UID": "demo-dropdown",
+                  "placeholder": "Select option...",
+                  "props": {
+                    "options": [
+                      {"value": "option1", "label": "First Option"},
+                      {"value": "option2", "label": "Second Option"},
+                      "Simple Option"
+                    ]
+                  }
+                },
+                {
+                  "type": "datepicker",
+                  "UID": "demo-date",
+                  "value": "2024-01-15"
+                },
+                {
+                  "type": "toggle",
+                  "UID": "demo-toggle",
+                  "text": "Enable notifications",
+                  "props": {"checked": true}
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "panel",
+      "UID": "right-panel",
+      "title": "Receipt & Signature",
+      "style": {
+        "height": "100%",
+        "overflow": "auto"
+      },
+      "children": [
+        {
+          "type": "receipt-preview",
+          "UID": "receipt-display"
+        },
+        {
+          "type": "section",
+          "UID": "signature-section",
+          "title": "Customer Signature",
+          "style": {
+            "marginTop": "20px"
+          },
+          "children": [
+            {
+              "type": "signature-pad",
+              "UID": "customer-signature"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "UID": "system-status",
+          "title": "System Status",
+          "style": {
+            "marginTop": "20px"
+          },
+          "children": [
+            {
+              "type": "status-bar",
+              "UID": "pos-status"
+            },
+            {
+              "type": "device-control",
+              "UID": "receipt-printer",
+              "props": {"deviceType": "printer"}
+            },
+            {
+              "type": "device-control",
+              "UID": "barcode-scanner",
+              "props": {"deviceType": "scanner"}
+            },
+            {
+              "type": "device-control",
+              "UID": "payment-terminal",
+              "props": {"deviceType": "terminal"}
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "UID": "display-demos",
+          "title": "Display Controls",
+          "style": {
+            "marginTop": "20px"
+          },
+          "children": [
+            {
+              "type": "label",
+              "UID": "welcome-label",
+              "text": "Welcome #{CashierName}!",
+              "props": {"variant": "heading"}
+            },
+            {
+              "type": "label",
+              "UID": "store-info",
+              "text": "#{StoreName} - Terminal #{RegisterNumber}",
+              "props": {"variant": "subtitle"}
+            },
+            {
+              "type": "label",
+              "UID": "current-time",
+              "text": "Current Time: #{CurrentTime}",
+              "props": {"variant": "caption"}
+            },
+            {
+              "type": "image",
+              "UID": "store-logo",
+              "props": {
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Crect width='100' height='60' fill='%23e5e7eb'/%3E%3Ctext x='50' y='35' text-anchor='middle' font-family='Arial' font-size='14' fill='%23374151'%3ELOGO%3C/text%3E%3C/svg%3E",
+                "alt": "Store Logo",
+                "width": "100px",
+                "height": "60px"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "context": {
+    "StoreName": "Demo POS Store",
+    "StoreAddress": "123 Commerce St, Business City, BC 12345",
+    "StorePhone": "(555) 987-6543",
+    "CashierName": "Demo Cashier",
+    "RegisterNumber": "REG-001",
+    "UserName": "Demo User",
+    "UserID": "USR001",
+    "AppVersion": "2.1.0",
+    "CurrentDate": "January 15, 2024",
+    "CurrentTime": "2:30 PM"
+  },
+  "globalShortcuts": {
+    "type": "shortcut-keys",
+    "UID": "global-shortcuts",
+    "props": {
+      "shortcuts": [
+        {"keys": "ctrl+s", "action": "saveTransaction"},
+        {"keys": "f1", "action": "showHelp"},
+        {"keys": "ctrl+shift+c", "action": "clearCart"},
+        {"keys": "f4", "action": "openCashDrawer"},
+        {"keys": "ctrl+p", "action": "printReceipt"},
+        {"keys": "esc", "action": "cancelOperation"}
+      ]
+    }
+  },
+  "contextMenus": [
+    {
+      "type": "context-menu",
+      "UID": "cart-item-menu",
+      "target": "cart-items",
+      "children": [
+        {"UID": "edit-quantity", "text": "Edit Quantity"},
+        {"UID": "apply-discount", "text": "Apply Discount"},
+        {"UID": "remove-item", "text": "Remove Item"},
+        {"UID": "item-details", "text": "View Details"}
+      ]
+    }
+  ],
+  "notifications": {
+    "type": "notification-area",
+    "UID": "pos-notifications"
+  },
+  "messageBoxes": [
+    {
+      "type": "message-box",
+      "UID": "confirmation-dialog",
+      "title": "Confirm Transaction",
+      "text": "Process payment of $#{TransactionTotal}?",
+      "props": {"type": "confirmation"}
+    },
+    {
+      "type": "message-box",
+      "UID": "error-dialog",
+      "title": "Payment Error",
+      "text": "Unable to process payment. Please try again or select a different payment method.",
+      "props": {"type": "error"}
+    }
+  ]
+}

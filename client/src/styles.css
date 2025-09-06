@@ -1,0 +1,232 @@
+:root {
+    --background: hsl(210, 40%, 98%);
+    --foreground: hsl(222.2, 84%, 4.9%);
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(222.2, 84%, 4.9%);
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(222.2, 84%, 4.9%);
+    --primary: hsl(214, 100%, 27%);
+    --primary-foreground: hsl(210, 40%, 98%);
+    --secondary: hsl(215, 25%, 44%);
+    --secondary-foreground: hsl(210, 40%, 98%);
+    --muted: hsl(210, 40%, 96%);
+    --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+    --accent: hsl(210, 40%, 96%);
+    --accent-foreground: hsl(222.2, 84%, 4.9%);
+    --destructive: hsl(0, 84.2%, 60.2%);
+    --destructive-foreground: hsl(210, 40%, 98%);
+    --border: hsl(214.3, 31.8%, 91.4%);
+    --input: hsl(214.3, 31.8%, 91.4%);
+    --ring: hsl(214, 100%, 27%);
+    --radius: 0.5rem;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dark {
+    --background: hsl(222.2, 84%, 4.9%);
+    --foreground: hsl(210, 40%, 98%);
+    --card: hsl(222.2, 84%, 4.9%);
+    --card-foreground: hsl(210, 40%, 98%);
+    --popover: hsl(222.2, 84%, 4.9%);
+    --popover-foreground: hsl(210, 40%, 98%);
+    --primary: hsl(210, 40%, 98%);
+    --primary-foreground: hsl(222.2, 84%, 4.9%);
+    --secondary: hsl(217.2, 32.6%, 17.5%);
+    --secondary-foreground: hsl(210, 40%, 98%);
+    --muted: hsl(217.2, 32.6%, 17.5%);
+    --muted-foreground: hsl(215, 20.2%, 65.1%);
+    --accent: hsl(217.2, 32.6%, 17.5%);
+    --accent-foreground: hsl(210, 40%, 98%);
+    --destructive: hsl(0, 62.8%, 30.6%);
+    --destructive-foreground: hsl(210, 40%, 98%);
+    --border: hsl(217.2, 32.6%, 17.5%);
+    --input: hsl(217.2, 32.6%, 17.5%);
+    --ring: hsl(212.7, 26.8%, 83.9%);
+}
+
+body {
+    font-family: var(--font-sans);
+}
+
+.designer-outline {
+    outline: 2px dashed #f59e0b !important;
+    outline-offset: 2px;
+    position: relative;
+}
+
+.designer-tooltip {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    background: #1f2937;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.designer-outline:hover .designer-tooltip {
+    opacity: 1;
+}
+
+.barcode-scanner {
+    border: 2px dashed #059669;
+    background: linear-gradient(45deg, transparent 40%, rgba(5, 150, 105, 0.1) 50%, transparent 60%);
+    animation: scan 2s infinite;
+}
+
+@keyframes scan {
+    0% { background-position: -100px 0; }
+    100% { background-position: 100px 0; }
+}
+
+.cash-drawer {
+    animation: drawer-open 0.3s ease-out;
+}
+
+@keyframes drawer-open {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+    100% { transform: translateY(0); }
+}
+
+.receipt-paper {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.signature-pad {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    cursor: crosshair;
+}
+
+.notification-slide {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.control-base {
+    position: relative;
+}
+
+.button-pad {
+    display: grid;
+    gap: 8px;
+}
+
+.tab-control {
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-header {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-button {
+    padding: 8px 16px;
+    border: none;
+    background: var(--muted);
+    color: var(--muted-foreground);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    background: var(--card);
+    color: var(--card-foreground);
+    border-bottom: 2px solid var(--primary);
+}
+
+.tab-content {
+    padding: 16px;
+    background: var(--card);
+}
+
+.splitter {
+    display: flex;
+    position: relative;
+}
+
+.splitter-handle {
+    width: 4px;
+    background: var(--border);
+    cursor: col-resize;
+    transition: background-color 0.2s;
+}
+
+.splitter-handle:hover {
+    background: var(--primary);
+}
+
+.price-checker {
+    text-align: center;
+    padding: 20px;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    background: var(--muted);
+}
+
+.scale-input {
+    background: linear-gradient(145deg, #f0f9ff, #e0f2fe);
+    border: 2px solid #0ea5e9;
+}
+
+.context-menu {
+    position: absolute;
+    background: var(--popover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.context-menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.context-menu-item:hover {
+    background: var(--accent);
+}
+
+.lookup-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--popover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    min-width: 400px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    min-width: 300px;
+    padding: 20px;
+}

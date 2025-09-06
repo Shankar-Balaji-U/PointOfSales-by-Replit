@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic POS Control System</title>
+    <meta name="description" content="A dynamic Point of Sale system with JSON-driven UI controls for modern retail operations.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Heroicons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/index.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ["var(--font-sans)"],
+                }
+            },
+        }
+    };
+    </script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body class="bg-background text-foreground min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-card border-b border-border shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-primary text-primary-foreground p-2 rounded-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-foreground">Dynamic POS System</h1>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="designer-toggle" data-testid="button-designer-toggle" class="px-3 py-2 text-sm bg-accent text-accent-foreground rounded-md hover:bg-accent/80 transition-colors">
+                        Designer Mode
+                    </button>
+                    <div class="text-sm text-muted-foreground">
+                        Store #001 | Terminal #1
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- Main POS Area -->
+            <div class="lg:col-span-3">
+                <div class="bg-card rounded-lg border border-border shadow-sm">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-lg font-semibold">POS Interface</h2>
+                            <div class="flex space-x-2">
+                                <button id="load-json" data-testid="button-load-json" class="px-3 py-1 text-xs bg-secondary text-secondary-foreground rounded hover:bg-secondary/90 transition-colors">
+                                    Load JSON
+                                </button>
+                                <button id="clear-all" data-testid="button-clear-all" class="px-3 py-1 text-xs bg-accent text-accent-foreground rounded hover:bg-accent/80 transition-colors">
+                                    Clear All
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic UI Container -->
+                        <div id="dynamic-ui-container" data-testid="container-dynamic-ui" class="min-h-96 p-4 bg-muted/30 rounded-lg border-2 border-dashed border-border">
+                            <div class="text-center text-muted-foreground">
+                                Dynamic controls will render here...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="space-y-6">
+                <!-- Context Variables -->
+                <div class="bg-card rounded-lg border border-border shadow-sm p-4">
+                    <h3 class="font-medium mb-3">Context Variables</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">UserName:</span>
+                            <span id="context-username" data-testid="text-context-username">John Doe</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">UserID:</span>
+                            <span id="context-userid" data-testid="text-context-userid">U001</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">AppVersion:</span>
+                            <span id="context-appversion" data-testid="text-context-appversion">2.1.0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">CurrentDate:</span>
+                            <span id="context-currentdate" data-testid="text-context-currentdate">2024-01-15</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Log -->
+                <div class="bg-card rounded-lg border border-border shadow-sm p-4">
+                    <h3 class="font-medium mb-3">Event Log</h3>
+                    <div id="event-log" data-testid="container-event-log" class="h-64 overflow-y-auto text-xs font-mono bg-muted p-3 rounded space-y-1">
+                        <div class="text-muted-foreground">[System] POS Control System initialized</div>
+                        <div class="text-muted-foreground">[System] Designer Mode: OFF</div>
+                        <div class="text-muted-foreground">[System] Waiting for UI definition...</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-card rounded-lg border border-border shadow-sm p-4">
+                    <h3 class="font-medium mb-3">Quick Actions</h3>
+                    <div class="space-y-2">
+                        <button id="load-demo" data-testid="button-load-demo" class="w-full px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm">
+                            Load Demo UI
+                        </button>
+                        <button id="load-pos-demo" data-testid="button-load-pos-demo" class="w-full px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm">
+                            Load POS Demo
+                        </button>
+                        <button id="load-comprehensive-demo" data-testid="button-load-comprehensive-demo" class="w-full px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm">
+                            Load Complete Demo
+                        </button>
+                        <button id="clear-log" data-testid="button-clear-log" class="w-full px-3 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/90 transition-colors text-sm">
+                            Clear Event Log
+                        </button>
+                        <button id="export-state" data-testid="button-export-state" class="w-full px-3 py-2 bg-accent text-accent-foreground rounded-md hover:bg-accent/80 transition-colors text-sm">
+                            Export State
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Area -->
+    <div id="notification-area" data-testid="container-notifications" class="fixed top-4 right-4 space-y-2 z-50"></div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" data-testid="overlay-modal" class="fixed inset-0 bg-black/50 z-40 hidden opacity-0 transition-opacity"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
